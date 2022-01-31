@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Safy.Core;
 using Safy.Core.Models;
+using Safy.Core.ViewModels;
 using Safy.DataAccess.InMemory;
 
 namespace SafyWebUI.Controllers
@@ -12,10 +13,12 @@ namespace SafyWebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
+        ProductCategoryRepository productCategories;
 
         public ProductManagerController()
         {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
         // GET: ProductManager
         public ActionResult Index()
@@ -27,8 +30,11 @@ namespace SafyWebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -57,7 +63,10 @@ namespace SafyWebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection();
+                return View(viewModel);
             }
         }
 
