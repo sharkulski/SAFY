@@ -1,4 +1,5 @@
-﻿using Safy.Core.Models;
+﻿using Safy.Core.Contracts;
+using Safy.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Safy.DataAccess.InMemory
 {
-    public class InMemoryRepository<T>  where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -18,7 +19,7 @@ namespace Safy.DataAccess.InMemory
         {
             className = typeof(T).Name;
             items = cache[className] as List<T>;
-            if(items == null)
+            if (items == null)
             {
                 items = new List<T>();
             }
@@ -50,7 +51,7 @@ namespace Safy.DataAccess.InMemory
         public T Find(string Id)
         {
             T t = items.Find(i => i.Id == Id);
-            if(t != null)
+            if (t != null)
             {
                 return t;
             }
