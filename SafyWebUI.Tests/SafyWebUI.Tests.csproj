@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -99,6 +102,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Safy.Core\Safy.Core.csproj">
+      <Project>{1AAF8011-F5CA-4D06-B9AE-FDA9AE982C17}</Project>
+      <Name>Safy.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SafyWebUI\Safy.WebUI.csproj">
       <Project>{F881B1BA-5BDA-4300-8C1E-C33D0004F255}</Project>
       <Name>Safy.WebUI</Name>
