@@ -10,6 +10,7 @@ namespace SafyWebUI.Controllers
 {
     public class BasketController : Controller
     {
+
         IBasketService basketService;
         IOrderService orderService;
 
@@ -17,6 +18,7 @@ namespace SafyWebUI.Controllers
         {
             this.basketService = BasketService;
             this.orderService = OrderService;
+ 
         }
         // GET: Basket
         public ActionResult Index()
@@ -42,15 +44,39 @@ namespace SafyWebUI.Controllers
 
             return PartialView(basketSummary);
         }
+       // [Authorize]
         public ActionResult Checkout()
         {
+            //Customer customer = customers.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
+
+            //if(customer != null)
+            //{
+            //    Order order = new Order()
+            //    {
+            //        Email = customer.Email,
+            //        City = customer.City,
+            //        State = customer.State,
+            //        Street = customer.Street,
+            //        FirstName = customer.FirstName,
+            //        Surname = customer.LastName,
+            //        ZipCode = customer.ZipCode
+            //    };
+
+            //    return View(order);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
             return View();
         }
         [HttpPost]
+       // [Authorize]
         public ActionResult Checkout(Order order)
         {
             var basketItems = basketService.GetBasketItems(this.HttpContext);
             order.OrderStatus = "Order Created";
+            order.Email = User.Identity.Name;
 
             order.OrderStatus = "Payment Processed";
             orderService.CreateOrder(order, basketItems);
