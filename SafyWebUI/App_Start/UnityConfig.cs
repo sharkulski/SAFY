@@ -2,6 +2,7 @@ using Safy.Core.Contracts;
 using Safy.Core.Models;
 using Safy.DataAccess.InMemory;
 using Safy.DataAccess.SQL;
+using Safy.Services;
 using System;
 
 using Unity;
@@ -48,6 +49,9 @@ namespace SafyWebUI
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
+            container.RegisterType<IBasketService, BasketService>();
         }
     }
 }
